@@ -11,22 +11,7 @@ document
     window.location.href = 'sec.html';
   });
 
-const buttons = document.querySelectorAll('.btn.text-white');
-let totalCount = 0;
-for (const button of buttons) {
-  button.addEventListener('click', function (event) {
-    totalCount += 1;
-    event.preventDefault();
-    alert('Bard update successfully.');
-    this.disabled = true;
-
-    if (totalCount === 6) {
-      alert('done');
-    }
-  });
-}
-console.log(totalCount);
-
+// count
 let minusCount = 6;
 let plusCount = 23;
 
@@ -44,20 +29,71 @@ for (const button of buttons1) {
     }
   });
 }
+// alert
+const buttons = document.querySelectorAll('.btn.text-white');
+let totalCount = 0;
+for (const button of buttons) {
+  button.addEventListener('click', function (event) {
+    totalCount += 1;
+    event.preventDefault();
+    alert('Bard update successfully.');
+    this.disabled = true;
+
+    if (totalCount === 6) {
+      alert('Congratas you have complete all the cureent task 👌😍🎉');
+    }
+  });
+}
 
 // add history
 
+const date = new Date();
+const options = {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+};
+const formattedDate = date.toLocaleDateString(undefined, options);
+
 const historyDiv = document.getElementById('history');
-const buttons2 = document.querySelectorAll('.btn.text-white');
 const clearHistoryBtn = document.getElementById('history-btn');
-for (const button of buttons2) {
-  button.addEventListener('click', function () {
+const titles = document.querySelectorAll('.data');
+
+titles.forEach(item => {
+  const getTitle = item.children[1].innerText;
+  item.children[3].children[1].addEventListener('click', function () {
+    const date = new Date();
+
+    const formattedDateAndTime = date.toLocaleDateString(undefined, {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      minute: '2-digit',
+      hour: '2-digit',
+      second: '2-digit',
+    });
+
+    const newElement = document.createElement('div');
     const newParagraph = document.createElement('p');
+    const dateElement = document.createElement('span');
+    const newTitle = document.createElement('h2');
+    newTitle.innerText = getTitle;
     newParagraph.innerText = `dolor sit, amet consectetur adipisicing elit. Deserunt repudiandae e`;
-    newParagraph.className = 'm-4 bg-[#F4F7FF] p-2 rounded-xl';
-    historyDiv.appendChild(newParagraph);
+    dateElement.innerText = formattedDateAndTime;
+    newTitle.className = 'text-[18px] font-medium text-blue-600';
+    newElement.className = 'text-left bg-[#F4F7FF] p-2 rounded-xl w-full mt-2';
+    dateElement.className = 'text-[14px] mt-1 text-blue-400';
+    newElement.appendChild(newTitle);
+    newElement.appendChild(newParagraph);
+    newElement.appendChild(dateElement);
+    historyDiv.appendChild(newElement);
   });
-}
+});
+
 clearHistoryBtn.addEventListener('click', function () {
   historyDiv.innerHTML = '';
 });
+
+document.querySelector('.date-container').innerHTML = formattedDate;
