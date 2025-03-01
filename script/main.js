@@ -8,7 +8,7 @@ document
   .getElementById('discover-card')
   .addEventListener('click', function (event) {
     event.preventDefault();
-    window.location.href = '../sec.html';
+    window.location.href = '/sec.html';
   });
 
 const buttons = document.querySelectorAll('.btn.text-white');
