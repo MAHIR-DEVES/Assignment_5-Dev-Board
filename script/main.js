@@ -11,7 +11,22 @@ document
     window.location.href = 'sec.html';
   });
 
-// count
+const buttons = document.querySelectorAll('.btn.text-white');
+let totalCount = 0;
+for (const button of buttons) {
+  button.addEventListener('click', function (event) {
+    totalCount += 1;
+    event.preventDefault();
+    alert('Bard update successfully.');
+    this.disabled = true;
+
+    if (totalCount === 6) {
+      alert('Congratay you have complete all the cureent task 😍🎉');
+    }
+  });
+}
+console.log(totalCount);
+
 let minusCount = 6;
 let plusCount = 23;
 
@@ -26,21 +41,6 @@ for (const button of buttons1) {
       minusDisplay.innerText = ` ${minusCount}`;
       plusDisplay.innerText = ` ${plusCount}`;
       button.disabled = true;
-    }
-  });
-}
-// alert
-const buttons = document.querySelectorAll('.btn.text-white');
-let totalCount = 0;
-for (const button of buttons) {
-  button.addEventListener('click', function (event) {
-    totalCount += 1;
-    event.preventDefault();
-    alert('Bard update successfully.');
-    this.disabled = true;
-
-    if (totalCount === 6) {
-      alert('Congratas you have complete all the cureent task 👌😍🎉');
     }
   });
 }
@@ -60,8 +60,10 @@ const historyDiv = document.getElementById('history');
 const clearHistoryBtn = document.getElementById('history-btn');
 const titles = document.querySelectorAll('.data');
 
-titles.forEach(item => {
+for (let i = 0; i < titles.length; i++) {
+  const item = titles[i];
   const getTitle = item.children[1].innerText;
+
   item.children[3].children[1].addEventListener('click', function () {
     const date = new Date();
 
@@ -79,18 +81,21 @@ titles.forEach(item => {
     const newParagraph = document.createElement('p');
     const dateElement = document.createElement('span');
     const newTitle = document.createElement('h2');
+
     newTitle.innerText = getTitle;
     newParagraph.innerText = `dolor sit, amet consectetur adipisicing elit. Deserunt repudiandae e`;
     dateElement.innerText = formattedDateAndTime;
+
     newTitle.className = 'text-[18px] font-medium text-blue-600';
     newElement.className = 'text-left bg-[#F4F7FF] p-2 rounded-xl w-full mt-2';
     dateElement.className = 'text-[14px] mt-1 text-blue-400';
+
     newElement.appendChild(newTitle);
     newElement.appendChild(newParagraph);
     newElement.appendChild(dateElement);
     historyDiv.appendChild(newElement);
   });
-});
+}
 
 clearHistoryBtn.addEventListener('click', function () {
   historyDiv.innerHTML = '';
