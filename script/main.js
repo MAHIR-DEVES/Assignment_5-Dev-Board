@@ -11,6 +11,7 @@ document
     window.location.href = 'sec.html';
   });
 
+// alart
 const buttons = document.querySelectorAll('.btn.text-white');
 let totalCount = 0;
 for (const button of buttons) {
@@ -25,8 +26,8 @@ for (const button of buttons) {
     }
   });
 }
-console.log(totalCount);
 
+// count
 let minusCount = 6;
 let plusCount = 23;
 
